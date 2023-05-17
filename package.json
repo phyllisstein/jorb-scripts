@@ -7,7 +7,13 @@
   "packageManager": "yarn@3.5.1",
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
+    "p-map-series": "^3.0.0",
     "umbrellajs": "^3.3.1",
     "vite": "^4.3.7"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "run:cli": "yarn node src/google.mjs"
   }
 }
