@@ -1,0 +1,39 @@
+{
+  "@context": "https://schema.org/",
+  "@type": "JobPosting",
+  "title": "Java Software Engineer (Remote)",
+  "datePosted": "2023-02-07",
+  "employmentType": "full-time",
+  "jobBenefits": "<p><strong>BENEFITS</strong></p><p></p> <ul> <li>Medical insurance</li> <li>Life insurance </li> <li>Law benefits</li> <li>Psychological Support</li> </ul>",
+  "qualifications": "<h3><br></h3><h3>WHAT WE’LL LIKE ABOUT YOU</h3><p><br><br></p><p><strong>YOU HAVE…</strong><br><br></p><ul> <li>You have 2+ years of experience as a Software Developer.</li> <li>You live and breathe Java.</li> <li>You have Domain Driven Design experience.</li> <li>You have experience with RDBMS (PostgreSQL) and Message Queues (Sidekiq, RabbitMQ ).</li> <li>You love solving problems with code and are driven by best practices.</li> <li>You are a stickler for the right solution, and want to expand your technical prowess.</li> <li>You are a team player and would rather ask for help than stay stuck for hours.</li> <li>You have experience working with Docker.</li> <li>You have experience working with modern cloud providers (such as AWS).</li> <li>You have a deep understanding of SQL.</li> <li>You have a Github account with code examples. Show us what you can do!</li> </ul>",
+  "responsibilities": "<h3>WHAT YOU’LL LIKE ABOUT US </h3> <ul> <li>Great company culture! Our diverse backgrounds, commitment, and passion are the things that make us great. </li> <li>We geek out on new ideas, proposals, anything that will positively impact our clients and of course, you!</li> <li>We’ve got training sessions in store to help you level up your skill set. </li> <li>With you on Boldr’s side, we’ll tackle social responsibility initiatives together.</li> <li>We have rest and relaxation benefits. (You’ll have ample time to travel wherever you please! And we’ll want to hear all about your stories when you get back to the office.)</li> <li>We also cap off every week with a bit (a lot) of competitive board games.</li> </ul><p><br></p> <h3>WHAT IS YOUR ROLE</h3><p>Reporting to our Technical Lead, the Java Software Engineer will have the opportunity to write custom applications, and integrations, learn and explore new technologies, and work with a talented and growing team.</p><p><br></p><p><br></p> <p><strong>WHY DO WE WANT YOU</strong></p> <p>We are currently looking for impact-driven individuals who are passionate in helping Boldr grow and achieve our Purpose. We expect our Team to become our ultimate partners to success by always giving their 110% in everything, sharing their talents and quirks, and championing our core values: Curious, Dynamic and Authentic.</p><p><br></p><p><br></p><h3>WHAT WILL YOU DO</h3><ul> <li>Writing and unit testing clean, performant and reusable Java and Ruby.</li> <li>Debugging complex Java problems to find simple solutions.</li> <li>Working on minor enhancements and bug fixes in Ruby.</li> <li>Working with the team to design solutions for our customer’s problems.</li> <li>Participating in code reviews and giving feedback to improve our code standards.</li> <li>Providing direction on future-looking technical, architectural and software design.</li> </ul>",
+  "description": "<h3>WHAT YOU’LL LIKE ABOUT US </h3> <ul> <li>Great company culture! Our diverse backgrounds, commitment, and passion are the things that make us great. </li> <li>We geek out on new ideas, proposals, anything that will positively impact our clients and of course, you!</li> <li>We’ve got training sessions in store to help you level up your skill set. </li> <li>With you on Boldr’s side, we’ll tackle social responsibility initiatives together.</li> <li>We have rest and relaxation benefits. (You’ll have ample time to travel wherever you please! And we’ll want to hear all about your stories when you get back to the office.)</li> <li>We also cap off every week with a bit (a lot) of competitive board games.</li> </ul><p><br></p> <h3>WHAT IS YOUR ROLE</h3><p>Reporting to our Technical Lead, the Java Software Engineer will have the opportunity to write custom applications, and integrations, learn and explore new technologies, and work with a talented and growing team.</p><p><br></p><p><br></p> <p><strong>WHY DO WE WANT YOU</strong></p> <p>We are currently looking for impact-driven individuals who are passionate in helping Boldr grow and achieve our Purpose. We expect our Team to become our ultimate partners to success by always giving their 110% in everything, sharing their talents and quirks, and championing our core values: Curious, Dynamic and Authentic.</p><p><br></p><p><br></p><h3>WHAT WILL YOU DO</h3><ul> <li>Writing and unit testing clean, performant and reusable Java and Ruby.</li> <li>Debugging complex Java problems to find simple solutions.</li> <li>Working on minor enhancements and bug fixes in Ruby.</li> <li>Working with the team to design solutions for our customer’s problems.</li> <li>Participating in code reviews and giving feedback to improve our code standards.</li> <li>Providing direction on future-looking technical, architectural and software design.</li> </ul><h3><br></h3><h3>WHAT WE’LL LIKE ABOUT YOU</h3><p><br><br></p><p><strong>YOU HAVE…</strong><br><br></p><ul> <li>You have 2+ years of experience as a Software Developer.</li> <li>You live and breathe Java.</li> <li>You have Domain Driven Design experience.</li> <li>You have experience with RDBMS (PostgreSQL) and Message Queues (Sidekiq, RabbitMQ ).</li> <li>You love solving problems with code and are driven by best practices.</li> <li>You are a stickler for the right solution, and want to expand your technical prowess.</li> <li>You are a team player and would rather ask for help than stay stuck for hours.</li> <li>You have experience working with Docker.</li> <li>You have experience working with modern cloud providers (such as AWS).</li> <li>You have a deep understanding of SQL.</li> <li>You have a Github account with code examples. Show us what you can do!</li> </ul><p><strong>BENEFITS</strong></p><p></p> <ul> <li>Medical insurance</li> <li>Life insurance </li> <li>Law benefits</li> <li>Psychological Support</li> </ul>",
+  "jobLocationType": "TELECOMMUTE",
+  "url": "https://apply.workable.com/boldr-1/j/97E75F4A63/",
+  "directApply": true,
+  "applicantLocationRequirements": {
+    "@type": "Country",
+    "name": "Mexico"
+  },
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "Boldr",
+    "sameAs": "https://www.boldrimpact.com/",
+    "logo": "https://workablehr.s3.amazonaws.com/uploads/account/logo/497039/logo",
+    "identifier": "boldr-1"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Mexico",
+      "addressLocality": "Guadalajara",
+      "addressRegion": "Jalisco"
+    }
+  },
+  "identifier": {
+    "@type": "PropertyValue",
+    "name": "Boldr",
+    "value": "97E75F4A63"
+  }
+}

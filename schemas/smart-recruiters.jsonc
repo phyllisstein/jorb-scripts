@@ -1,0 +1,35 @@
+/**
+ * Metadata for SmartRecruiters is embedded in the Custom Search response. Good
+ * for you, SmartRecruiters! And good for me.
+ *
+ * $.items[*].pagemap.jobposting
+ * $.items[*].pagemap.postaladdress
+ */
+
+ {
+  "kind": "customsearch#result",
+  "pagemap": {
+    "jobposting": [
+      {
+        "dateposted": "2023-05-03T20:50:07.376Z",
+        "qualifications": "3+ Years of Experience with Ruby on Rails3+ Years with front-end technologies (VueJs/React/Angular 2+ - Typescript preferred)Experience with LinuxExperience with RDBMS (Postgresql preferred)Experie...",
+        "incentives": "This is a full-time, permanent role. We provide a competitive salary and benefits. Prior to an interview, selected applicants will receive an assessment of your development skills.",
+        "responsibilities": "The Full Stack Ruby on Rails Developer would join our Digital Delivery practice and contribute to the design and development of internal and client-facing applications.Involvement in architecting,...",
+        "employmenttype": "Full-time",
+        "hiringorganization": "Shore Consulting",
+        "description": "Company DescriptionShore is an IT and strategy consulting firm focusing on innovation in the public sector. We deliver services and tools that advance public sector organizations and the services...",
+        "industry": "Information Technology And Services",
+        "title": "Full Stack Ruby on Rails Developer"
+      }
+    ],
+    "postaladdress": [
+      {
+        "addresslocality": "Toronto",
+        "postalcode": "M5A 3Y5",
+        "addressregion": "Ontario",
+        "addresscountry": "Canada",
+        "streetaddress": "130 Queens Quay East"
+      }
+    ]
+  }
+}

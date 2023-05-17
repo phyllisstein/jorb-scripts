@@ -1,0 +1,23 @@
+{
+  "@context": "http://schema.org",
+  "@type": "JobPosting",
+  "title": "Software Engineer (Java and Ruby)",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "Instructure",
+    "logo": "https://lever-client-logos.s3.amazonaws.com/f1a89f43-2f13-49e7-b7d9-f4fccce1814b-1560379274000.png"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "US-Remote",
+      "addressRegion": null,
+      "addressCountry": null,
+      "postalCode": null
+    }
+  },
+  "employmentType": "Full-time",
+  "datePosted": "2019-10-21",
+  "description": "<p>At Instructure, we believe in the power of people to grow and succeed throughout their lives. Our goal is to amplify that power by creating intuitive products that simplify learning and personal development, facilitate meaningful relationships, and inspire people to go further in their educations and careers. We do this by giving smart, creative, passionate people opportunities to create awesome. And that's where you come in:</p><p><br></p><p>We’re hiring a mid to senior level Engineer for our Professional Services team. You’ll be working closely with project managers and customers to build custom solutions and integrations.  Our team builds unique solutions to solve customer problems and improve the customer experience.  You will be responsible for assisting with technical direction and mentoring other developers.</p>\\n<p><p><br></p><b>What you will be doing: </b><ul><li>Building integrations and custom software solutions to solve unique customer problems.</li><li>Following best practices to write well-tested, high performing code.</li><li>Participating in code reviews to ensure that code quality remains high.</li><li>Working with other engineers to drive technical excellence and to delight customers.</li></ul><div><br></div><p><br></p><b>Here’s what you will need to know/have:</b><ul><li>Bachelors Degree in Computer Science or equivalent degree or work experience.</li><li>5+ years experience in software development.</li><li>Proven experiencing in delivering software products.</li><li>Experience writing and maintaining full stack Java web applications.</li><li>Front end experience with Angular or React.&nbsp;</li><li>Willingness to learn Ruby/Rails.</li><li>Experience with Amazon Web Services and deploying your applications.</li><li>Experience with PostgreSQL or other RDBMS.</li><li>Self-directed, organized and versatile; willingness to work on a variety of projects as assigned.</li><li>Willingness to collaborate with a team and a focus on delivering value to customers.</li><li>A passion for learning and continuing your professional development.</li><li>Polyglots preferred.</li></ul><p><br></p><b>Get in on all the awesome at Instructure.</b><ul><li>Competitive salary and 401k&nbsp;</li><li>Employee Stock Purchase program</li><li>Sign on equity (RSU's)</li><li>Medical, dental, disability, and life insurance HSA program, vision, voluntary life, and AD&amp;D&nbsp;</li><li>Lots of paid time off, 21 paid holidays, and flexible work schedules&nbsp;</li><li>Fitness club memberships and rewards-based fitness tracking&nbsp;</li><li>Fully-stocked kitchens and catered lunches&nbsp;</li><li>iMacs or Macbooks</li></ul><p><br></p></p>\\n<div>$90,000 - $125,000 a year</div><small><div>Depending on experience. </div></small>\\n<p>We’ve always believed in hiring the most awesome people and treating them right.&nbsp;We know that the more diverse we are, the more diverse our ideas will be and when we openly welcome those ideas, our environment is better and our business is stronger.</p><p><br></p><p>At Instructure we participate in E-Verify and yes, in case you didn't catch it from the above, we are an Equal Opportunity Employer.</p>"
+}
