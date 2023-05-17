@@ -2,6 +2,86 @@ import cheerio from 'cheerio'
 import pMap from 'p-map-series'
 
 /**
+ * Job boards to seaarch. (Google-specific syntax is unnecessary. Just write
+ * domain names.)
+ */
+const JOB_BOARD_SITES = [
+  'boards.greenhouse.io',
+  'jobs.lever.co',
+  // TODO: Parse the richer schema returned directly in Google's results.
+  // 'jobs.smartrecruiters.com',
+  'apply.workable.com',
+  'jobs.jobvite.com',
+]
+
+/**
+ * Results containing ANY of these terms will be excluded, whether or not the
+ * other terms are present.
+ *
+ * You may be able to exclude phrases by wrapping them in double quotes:
+ *
+ *    '"death star"'
+ *
+ * Just thinking out loud. Test at your own peril.
+ */
+const EXCLUDED_TERMS = [
+]
+
+/**
+ * These terms are OR'd together. Results must contain at least one of them. See
+ * the above comment about phrases.
+ */
+const REQUIRED_TERMS = [
+]
+
+/**
+ * Super useless: thanks to excluded/included terms, we don't care that much
+ * whether a random unstructured keyword is present. Google still requires it.
+ */
+const QUERY_STRING = 'job'
+
+/**
+ * Kick off a search. This is the entry point for the script.
+ */
+async function searchJobs() {
+  const key = 'AIzaSyAnPxo5sufX4UVE7CF-dGAX3wUcwgCkTb4'
+  const cx = '415e89368a92c46a5'
+
+  /**
+   * Construct search URL.
+   */
+  const sitesParam = JOB_BOARD_SITES.map(v=>`site:${v}`).join(' ')
+  const requiredTermsParam = REQUIRED_TERMS.join(' ')
+  const excludeTermsParam = EXCLUDED_TERMS.join(' ')
+  const url = `https://www.googleapis.com/customsearch/v1?key=${encodeURIComponent(key)}&cx=${cx}&q=${encodeURIComponent(q)}&orTerms=${encodeURIComponent(sitesParam)}&excludeTerms=${encodeURIComponent(excludeTermsParam)}&hq=${encodeURIComponent(requiredTermsParam)}&dateRestrict=d1`
+
+  /**
+   * WARN: The Fetch API is available in Node.js and browser runtimes, but not
+   * in Google Apps Scripts. The first request uses Node's API. The
+   * commented-out alternative uses Google's.
+   */
+  const rawResponse = await fetch(url)
+  const response = await rawResponse.json()
+  // const response = JSON.parse(
+  //   UrlFetchApp.fetch(url),
+  // )
+
+  const listings = await pMap(response.items, async item => {
+    const schema = await getLDSchema(item.link)
+
+    if (!schema) {
+      return
+    }
+
+    const parsed = parseJobSchema(schema)
+    parsed.link = item.link
+    return parsed
+  })
+
+  console.log(listings)
+}
+
+/**
  * Grab the JSON-LD schema from the job listing page. Every site but
  * SmartRecruiters embeds a script tag with its structured Schema.org metadata.
  *
@@ -10,9 +90,7 @@ import pMap from 'p-map-series'
  */
 async function getLDSchema(link) {
   /**
-   * WARN: The Fetch API is available in Node.js and browser runtimes, but not
-   * in Google Apps Scripts. The first request uses Node's API. The
-   * commented-out alternative uses Google's.
+   * WARN: See note above regarding the Fetch API.
    */
   const rawRes = await fetch(link)
   // const res = UrlFetchApp.fetch(link)
@@ -23,8 +101,8 @@ async function getLDSchema(link) {
   }
 
   /**
-   * WARN: As with the preceding, Response#text is a Node API, and
-   * HTTPResponse#getContentText is a Google Apps Script API.
+   * WARN: Another quirk of browsers vs. Google, Response#text is a Node API,
+   * and HTTPResponse#getContentText is a Google Apps Script API.
    */
   const markup = await rawRes.text()
   // const markup = res.getContentText()
@@ -93,65 +171,6 @@ function parseJobSchema(rawJSON) {
     employmentType,
     jobLocation,
   }
-}
-
-async function searchJobs() {
-  const key = 'AIzaSyAnPxo5sufX4UVE7CF-dGAX3wUcwgCkTb4'
-  const cx = '415e89368a92c46a5'
-
-  // Job boards to seaarch. (Google-specific syntax is unnecessary. Just add domain names.)
-  const sites = [
-    'boards.greenhouse.io',
-    'jobs.lever.co',
-    // TODO: Parse the richer schema returned directly in Google's results.
-    // 'jobs.smartrecruiters.com',
-    'apply.workable.com',
-    'jobs.jobvite.com',
-  ]
-
-  // Results containing ANY of these terms will be excluded, whether or not the
-  // other terms are present.
-  const excludeTerms = [
-    'basis',
-    // 'c#',
-  ]
-
-  // These are OR'd together. Results must contain at least one of them.
-  const requiredTerms = [
-    'ruby',
-  ]
-
-  // We don't care that much whether a random unstructured keyword is present.
-  const q = 'job'
-
-  /**
-   * Construct search URL.
-   */
-  const sitesParam = sites.map(v=>`site:${v}`).join(' ')
-  const requiredTermsParam = requiredTerms.join(' ')
-  const excludeTermsParam = excludeTerms.join(' ')
-  const url = `https://www.googleapis.com/customsearch/v1?key=${encodeURIComponent(key)}&cx=${cx}&q=${encodeURIComponent(q)}&orTerms=${encodeURIComponent(sitesParam)}&excludeTerms=${encodeURIComponent(excludeTermsParam)}&hq=${encodeURIComponent(requiredTermsParam)}&dateRestrict=d1`
-
-  // WARN: See previous warnings about Google vs. Node runtimes. This is Node.
-  const rawResponse = await fetch(url)
-  const response = await rawResponse.json()
-  // const response = JSON.parse(
-  //   UrlFetchApp.fetch(url),
-  // )
-
-  const listings = await pMap(response.items, async item => {
-    const schema = await getLDSchema(item.link)
-
-    if (!schema) {
-      return
-    }
-
-    const parsed = parseJobSchema(schema)
-    parsed.link = item.link
-    return parsed
-  })
-
-  console.log(listings)
 }
 
 searchJobs()
