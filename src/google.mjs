@@ -11,16 +11,17 @@ import pMap from 'p-map-series'
 async function getLDSchema(link) {
   // const res = UrlFetchApp.fetch(link)
   const rawRes = await fetch(link, {
-    mode: 'no-cors',
-    credentials: 'omit',
-    headers: {
-      'Accept': 'text/html',
-      'Referer': 'https://www.google.com/',
-    },
+    // mode: 'no-cors',
+    // credentials: 'omit',
+    // headers: {
+    //   'Accept': 'text/html',
+    //   'Referer': 'https://www.google.com/',
+    // },
   })
 
   if (!rawRes.ok) {
     console.warn(`Error fetching ${link}: ${rawRes.status} ${rawRes.statusText}`)
+    debugger
     return
   }
 
@@ -37,9 +38,11 @@ async function getLDSchema(link) {
   const tag = tags[0]
   const text = $(tag).text()
 
-  return JSON.parse(
-    text
-  )
+  const ret = JSON.parse(text)
+
+  console.log({ ret, link, text })
+
+  return ret
 }
 
 /**
@@ -113,12 +116,11 @@ async function searchJobs() {
   // excludeTerms
   const excludeTerms = [
     'basis',
-    'c#',
+    // 'c#',
   ]
 
   // hq
   const requiredTerms = [
-    'java',
     'ruby',
   ]
 
@@ -142,7 +144,7 @@ async function searchJobs() {
 
   const response = await rawResponse.json()
 
-  const listings = (await pMap(response.items, async item => {
+  const listings = await pMap(response.items, async item => {
     const schema = await getLDSchema(item.link)
 
     if (!schema) {
@@ -152,7 +154,7 @@ async function searchJobs() {
     const parsed = parseJobSchema(schema)
     parsed.link = item.link
     return parsed
-  })).filter(Boolean)
+  })
 
   console.log(listings)
 }
