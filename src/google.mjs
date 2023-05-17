@@ -96,47 +96,48 @@ function parseJobSchema(rawJSON) {
 }
 
 async function searchJobs() {
-  // const key = 'AIzaSyBw7bI80qOT-YR6a7I7u2qROz24D8KzSUA'
-  // const key = 'a64a2e4c369d5d0a5e4e8194a66903ee07517f5c'
   const key = 'AIzaSyAnPxo5sufX4UVE7CF-dGAX3wUcwgCkTb4'
   const cx = '415e89368a92c46a5'
 
-  // site:
+  // Job boards to seaarch. (Google-specific syntax is unnecessary. Just add domain names.)
   const sites = [
     'boards.greenhouse.io',
     'jobs.lever.co',
-    // TKTK: Parse the richer schema returned directly in Google's results.
+    // TODO: Parse the richer schema returned directly in Google's results.
     // 'jobs.smartrecruiters.com',
     'apply.workable.com',
     'jobs.jobvite.com',
   ]
 
-  // excludeTerms
+  // Results containing ANY of these terms will be excluded, whether or not the
+  // other terms are present.
   const excludeTerms = [
     'basis',
     // 'c#',
   ]
 
-  // hq
+  // These are OR'd together. Results must contain at least one of them.
   const requiredTerms = [
     'ruby',
   ]
 
-  // q (throwaway)
+  // We don't care that much whether a random unstructured keyword is present.
   const q = 'job'
 
+  /**
+   * Construct search URL.
+   */
   const sitesParam = sites.map(v=>`site:${v}`).join(' ')
   const requiredTermsParam = requiredTerms.join(' ')
   const excludeTermsParam = excludeTerms.join(' ')
-
   const url = `https://www.googleapis.com/customsearch/v1?key=${encodeURIComponent(key)}&cx=${cx}&q=${encodeURIComponent(q)}&orTerms=${encodeURIComponent(sitesParam)}&excludeTerms=${encodeURIComponent(excludeTermsParam)}&hq=${encodeURIComponent(requiredTermsParam)}&dateRestrict=d1`
 
+  // WARN: See previous warnings about Google vs. Node runtimes. This is Node.
+  const rawResponse = await fetch(url)
+  const response = await rawResponse.json()
   // const response = JSON.parse(
   //   UrlFetchApp.fetch(url),
   // )
-
-  const rawResponse = await fetch(url)
-  const response = await rawResponse.json()
 
   const listings = await pMap(response.items, async item => {
     const schema = await getLDSchema(item.link)
