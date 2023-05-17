@@ -1,0 +1,13 @@
+{
+  "name": "jorb-scripts",
+  "version": "0.0.0",
+  "main": "index.html",
+  "author": "Daniel P. Shannon <daniel@try.works>",
+  "license": "GPL-3.0-or-later",
+  "packageManager": "yarn@3.5.1",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "umbrellajs": "^3.3.1",
+    "vite": "^4.3.7"
+  }
+}
