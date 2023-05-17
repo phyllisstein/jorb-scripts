@@ -9,24 +9,26 @@ import pMap from 'p-map-series'
  *                        results
  */
 async function getLDSchema(link) {
+  /**
+   * WARN: The Fetch API is available in Node.js and browser runtimes, but not
+   * in Google Apps Scripts. The first request uses Node's API. The
+   * commented-out alternative uses Google's.
+   */
+  const rawRes = await fetch(link)
   // const res = UrlFetchApp.fetch(link)
-  const rawRes = await fetch(link, {
-    // mode: 'no-cors',
-    // credentials: 'omit',
-    // headers: {
-    //   'Accept': 'text/html',
-    //   'Referer': 'https://www.google.com/',
-    // },
-  })
 
   if (!rawRes.ok) {
-    console.warn(`Error fetching ${link}: ${rawRes.status} ${rawRes.statusText}`)
-    debugger
+    console.warn(`Error fetching ${ link }: ${ rawRes.status } ${ rawRes.statusText }`)
     return
   }
 
+  /**
+   * WARN: As with the preceding, Response#text is a Node API, and
+   * HTTPResponse#getContentText is a Google Apps Script API.
+   */
   const markup = await rawRes.text()
   // const markup = res.getContentText()
+
   const $ = cheerio.load(markup)
   const tags = $('script[type="application/ld+json"]')
 
@@ -37,12 +39,7 @@ async function getLDSchema(link) {
 
   const tag = tags[0]
   const text = $(tag).text()
-
-  const ret = JSON.parse(text)
-
-  console.log({ ret, link, text })
-
-  return ret
+  return JSON.parse(text)
 }
 
 /**
@@ -108,7 +105,8 @@ async function searchJobs() {
   const sites = [
     'boards.greenhouse.io',
     'jobs.lever.co',
-    // 'jobs.smartrecruiters.com',    // TODO: Parse richer schema from Google results.
+    // TKTK: Parse the richer schema returned directly in Google's results.
+    // 'jobs.smartrecruiters.com',
     'apply.workable.com',
     'jobs.jobvite.com',
   ]
@@ -132,16 +130,12 @@ async function searchJobs() {
   const excludeTermsParam = excludeTerms.join(' ')
 
   const url = `https://www.googleapis.com/customsearch/v1?key=${encodeURIComponent(key)}&cx=${cx}&q=${encodeURIComponent(q)}&orTerms=${encodeURIComponent(sitesParam)}&excludeTerms=${encodeURIComponent(excludeTermsParam)}&hq=${encodeURIComponent(requiredTermsParam)}&dateRestrict=d1`
-  // const url = `https://cse.google.com/cse?key=${encodeURIComponent(key)}&cx=${cx}&q=${encodeURIComponent(q)}&orTerms=${encodeURIComponent(sitesParam)}&excludeTerms=${encodeURIComponent(excludeTermsParam)}&hq=${encodeURIComponent(requiredTermsParam)}&dateRestrict=d1`
 
   // const response = JSON.parse(
   //   UrlFetchApp.fetch(url),
   // )
 
-  const rawResponse = await fetch(url, {
-    // mode: 'no-cors',
-  })
-
+  const rawResponse = await fetch(url)
   const response = await rawResponse.json()
 
   const listings = await pMap(response.items, async item => {
