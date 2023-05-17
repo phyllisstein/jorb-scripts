@@ -25,6 +25,7 @@ const JOB_BOARD_SITES = [
  * Just thinking out loud. Test at your own peril.
  */
 const EXCLUDED_TERMS = [
+  'c#',
 ]
 
 /**
@@ -32,6 +33,7 @@ const EXCLUDED_TERMS = [
  * the above comment about phrases.
  */
 const REQUIRED_TERMS = [
+  'java',
 ]
 
 /**
@@ -53,7 +55,7 @@ async function searchJobs() {
   const sitesParam = JOB_BOARD_SITES.map(v=>`site:${v}`).join(' ')
   const requiredTermsParam = REQUIRED_TERMS.join(' ')
   const excludeTermsParam = EXCLUDED_TERMS.join(' ')
-  const url = `https://www.googleapis.com/customsearch/v1?key=${encodeURIComponent(key)}&cx=${cx}&q=${encodeURIComponent(q)}&orTerms=${encodeURIComponent(sitesParam)}&excludeTerms=${encodeURIComponent(excludeTermsParam)}&hq=${encodeURIComponent(requiredTermsParam)}&dateRestrict=d1`
+  const url = `https://www.googleapis.com/customsearch/v1?key=${encodeURIComponent(key)}&cx=${cx}&q=${encodeURIComponent(QUERY_STRING)}&orTerms=${encodeURIComponent(sitesParam)}&excludeTerms=${encodeURIComponent(excludeTermsParam)}&hq=${encodeURIComponent(requiredTermsParam)}&dateRestrict=d1`
 
   /**
    * WARN: The Fetch API is available in Node.js and browser runtimes, but not
@@ -78,7 +80,7 @@ async function searchJobs() {
     return parsed
   })
 
-  console.log(listings)
+  console.log(listings.filter(Boolean))
 }
 
 /**
@@ -111,13 +113,23 @@ async function getLDSchema(link) {
   const tags = $('script[type="application/ld+json"]')
 
   if (tags.length === 0) {
-    console.warn(`No JSON-LD schema found for ${link}`)
+    console.warn(`No JSON-LD schema on the page ${link}`)
     return
   }
 
   const tag = tags[0]
   const text = $(tag).text()
-  return JSON.parse(text)
+
+  if (text == null) {
+    console.warn(`No text found for ${link} JSON-LD tag`)
+    return
+  }
+
+  try {
+    return JSON.parse(text)
+  } catch (e) {
+    console.warn(`Error parsing JSON-LD schema for ${link}: ${e.message}`)
+  }
 }
 
 /**
